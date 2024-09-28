@@ -42,6 +42,31 @@ function App() {
        <h2>React Weather App</h2>
     </header>
     <div className="container">
+      <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
+        <div class="col-auto">
+          <label for="location-name" class="col-form-label">
+            Enter Location:
+          </label>
+        </div>
+        <div class="col-auto">
+          <input
+          type="text"
+          id="location-name"
+          class="form-control"
+          onChange={inputHandler}
+          value={getState}
+          />
+        <button
+          className="btn btn-primary mt-2"
+          onClick={submitHandler}
+        >
+          Search
+        </button>
+
+        </div>
+      </div>
+
+
       <div className="card mt-3 mx-auto">
         { /* Is it true data coming in from open weather based on input location */}
         {apiData.main? (
