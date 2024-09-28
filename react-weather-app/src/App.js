@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import countries from 'i18n-iso-countries';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTemperatureLow, faTemperatureHigh, faMapMarketAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { faTemperatureLow, faTemperatureHigh, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';  
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
@@ -38,27 +38,76 @@ function App() {
 
   return (
   <div className="App">
-    <header className="d-flex justify-content align-items-center">
+    <header className="d-flex justify-content-center align-items-center">
        <h2>React Weather App</h2>
     </header>
 
     <div className="card mt-3 mx-auto">
       { /* Is it true data coming in from open weather based on input location */}
-      {apiData.main
-      ? (<div class="card-body text-center">
-        <img
-          src={`http://openweathermap.org/img/w/${apiData.weather[0].icon}.png`}
-          alt="weather status icon"
-          className="weather-icon"
-        />
+      {apiData.main? (
+        <div class="card-body text-center">
+          <img
+            src={`http://openweathermap.org/img/w/${apiData.weather[0].icon}.png`}
+            alt="weather status icon"
+            className="weather-icon"
+          />
         <p className="h2">
           {kelvinToFarenheit(apiData.main.temp)}&deg; F
         </p>
 
-       
+        <p className="h5">
+          <FontAwesomeIcon
+          icon={faMapMarkerAlt}
+          className="fas fa-1x mr-2 text-dark"
+          />{''}
+          <strong>{apiData.name}</strong>
+        </p>
 
-      </div>) /* Load data if true */
-      : (<h1>Loading...</h1>)} {/*Outout message if false */} 
+        <div className="row mt-4">
+          <div className="col-md-6">
+            <p>
+              <FontAwesomeIcon
+                icon={faTemperatureLow}
+                className="fas fa-1x mr-2 text-primary"
+              />{''}
+              <strong>
+              {kelvinToFarenheit(apiData.main.temp_min)}&deg; F
+              </strong>
+            </p>
+
+            <p>
+              <FontAwesomeIcon
+                icon={faTemperatureHigh}
+                className="fas fa-1x mr-2 text-danger"
+              />{''}
+              <strong>
+              {kelvinToFarenheit(apiData.main.temp_min)}&deg; F
+              </strong>
+            </p>
+          </div>
+
+          <div className="col-md-6">
+            <p>
+              {''}
+              <strong>{apiData.weather[0].main}</strong>
+            </p>
+
+            <p>
+              <strong>
+                {' '}
+                {countries.getName(apiData.sys.country, 'en', {
+                  select: 'official',
+                })}
+              </strong>
+            </p>
+        </div>
+     </div>
+  </div>    
+
+      ) /* Load data if true */
+
+     : (<h1>Loading...</h1>
+      )} {/*Outout message if false */} 
     </div>
 
     <footer className="footer">
