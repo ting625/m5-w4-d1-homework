@@ -106,7 +106,7 @@ function App() {
                   className="fas fa-1x mr-2 text-danger"
                 />{''}
                 <strong>
-                {kelvinToFarenheit(apiData.main.temp_min)}&deg; F
+                {kelvinToFarenheit(apiData.main.temp_max)}&deg; F
                 </strong>
               </p>
             </div>
