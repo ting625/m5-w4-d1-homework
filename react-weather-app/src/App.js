@@ -47,9 +47,15 @@ function App() {
       {apiData.main
       ? (<div class="card-body text-center">
         <img
-          src={`http://openweather.org/img/w/${apiData.weather[0].icon}.png`}
-        
+          src={`http://openweathermap.org/img/w/${apiData.weather[0].icon}.png`}
+          alt="weather status icon"
+          className="weather-icon"
         />
+        <p className="h2">
+          {kelvinToFarenheit(apiData.main.temp)}&deg; F
+        </p>
+
+       
 
       </div>) /* Load data if true */
       : (<h1>Loading...</h1>)} {/*Outout message if false */} 
